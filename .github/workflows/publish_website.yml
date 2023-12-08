@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npx vitepress build
+          npm i
 
       - name: Build with VitePress
         run: |
