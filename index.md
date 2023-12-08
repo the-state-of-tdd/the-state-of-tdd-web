@@ -16,10 +16,10 @@ hero:
 
 features:
   - title: 2023 (in progress)
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: Join us in collecting data and change the way the industry build software through Test Driven Development.
   - title: 2022
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: What the data has to say about TDD in 2022?
   - title: 2021
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: The first edition of collecting information regarding the TDD practice focused on TDD anti-patterns.
 ---
 
