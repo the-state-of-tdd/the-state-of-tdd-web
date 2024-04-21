@@ -21,9 +21,9 @@ features:
     details: No data was collected
   - title: 2022 - data available
     details: What does the data have to say about TDD in 2022?
-    link: results/2022/
+    link: results/2022.html
   - title: 2021 - data available
     details: The first edition of collecting information regarding the TDD practice focused on TDD anti-patterns.
-    link: results/2021/
+    link: results/2021.html
 ---
 
