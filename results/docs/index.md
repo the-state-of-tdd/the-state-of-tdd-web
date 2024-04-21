@@ -1,0 +1,463 @@
+---
+toc: false
+---
+<style>
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--sans-serif);
+  margin: 4rem 0 8rem;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 2rem 0;
+  max-width: none;
+  font-size: 14vw;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero h2 {
+  margin: 0;
+  max-width: 34em;
+  font-size: 20px;
+  font-style: initial;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--theme-foreground-muted);
+}
+
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 90px;
+  }
+}
+
+</style>
+
+<div class="hero">
+  <h1>The state of TDD, 2022</h1>
+  <!-- <h2>Welcome to your new project! Edit&nbsp;<code style="font-size: 90%;">docs/index.md</code> to change this page.</h2>
+  <a href="https://observablehq.com/framework/getting-started">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a> -->
+</div>
+
+## General information
+
+A survey was created using [Google Forms](https://www.google.com/forms) and the survey was publicly available from
+September 2022 until November 2022. The first recorded answer was on September 14 2022 and the last being on November 14, 2022.
+
+In order to share the survey to as many people as possible, Twitter and Slack were used to diffuse the survey. To reach
+different communities and find as many practitioners as possible, some of the following crafters communities
+were specific targeted to share the survey:
+
+- Bilbao
+- [Murcia](https://www.meetup.com/es-ES/Software-Craftsmanship-Murcia)
+- Tenerife
+- [Barcelona](https://www.meetup.com/es-ES/software-crafters-barcelona)
+
+These communities of crafters are under the umbrella of a global
+community, here we named a few that are from Spain, but, the [slack channel](http://slack.softwarecraftsmanship.org)
+holds many others from around the globe.
+
+Besides that, there was an effort from the community to reshare and reach as many people as possible. In total,
+${baseData.length} answers were recorded. The survey was structured in four sections aimed to collect data in the
+following areas:
+
+- Professional background
+- TDD practices on a daily basis
+- TDD practices at companies I worked at
+- Anti-patterns
+
+In the remainder of this report, we will go over the results that this survey gave.
+
+### Total of ${baseData.length} answers distributed in the time the survey was open
+
+<div class="grid" style="grid-auto-rows: 504px;">
+  <div class="card">${
+  resize((width, height) => Plot.plot({
+    width: width,
+    height: height,
+    y: {
+    grid: true
+  },
+  marks: [
+    Plot.rectY(baseData, {x: "answered", y: "id", interval: d3.utcDay, fill: "pink", stroke: "gray", margin: 10}),
+    Plot.ruleY([0])
+  ]
+  }))}
+  </div>
+</div>
+
+```js
+const latAndLon = FileAttachment("lag_long_countries.json").json({typed: true});
+```
+
+```js
+const data = ({
+  "2021": await FileAttachment("raw-data-2021.csv").csv({typed: true}),
+  "2022": await FileAttachment("raw-data-2022.csv").csv({typed: true})
+});
+```
+
+```js
+const rawData = data["2022"];
+```
+
+```js
+const baseData = rawData.map((item, index) => ({
+  id: index,
+  ...item,
+  answered: new Date(item.Timestamp)
+}));
+```
+
+```js
+const programmingLanguages = baseData.map(
+  item => item["I write/wrote code professionally in the following languages (programming languages listed are from https://www.tiobe.com/tiobe-index):"])
+  .map(item => item.split(","))
+  .flat()
+  .map(item => ({
+    language: item.trim()
+  })
+);
+
+const recallAntiPatterns = d3.group(
+  baseData.filter(i => i["From the following list check the anti patterns you can recall"]),
+  d => d["From the following list check the anti patterns you can recall"]
+);
+```
+
+
+---
+
+
+
+## Respondents background
+
+```js
+const byYearsOfExperience = Array.from(d3.group(baseData, d => d["I am a software developer working in the industry professionally for:"]));
+```
+
+```js
+Treemap(byYearsOfExperience, {
+  path: (d) => d[0], // e.g. flare/animate/Easing
+  label: (d) => d[0], // display text
+  group: (d) => d[0], // for color; e.g. animate
+  value: (d) => d[1].length, // area of each rect
+  title: (d, n) => "Total of " + d[1].length + " answers", // hover text
+  width,
+  height: 500
+})
+```
+
+```js
+const byProjectsWorkedFor = Array.from(d3.group(baseData, d => d["I work/worked for projects in the following countries (list provided by https://www.listofcountriesoftheworld.com/):"]));
+```
+
+### Languages used to write code
+
+<div class="grid" style="grid-auto-rows: 504px;">
+  <div class="card">${
+  resize((width, height) => Plot.plot({
+    width: width,
+    height: height,
+    marginRight: 10,
+    marginLeft: 120,
+    marks: [
+      Plot.barX(programmingLanguages, Plot.groupY({x: "count", fill: "count"}, {y: "language", sort: {y: "x", reverse: true}})),
+      Plot.ruleX([0])
+    ]
+  }))}
+  </div>
+</div>
+
+
+### Countries worked for
+
+```js
+const world = FileAttachment("countries-110m.json").json()
+```
+
+```js
+const land = topojson.feature(world, world.objects.land)
+```
+
+```js
+const answersByCountry = dataToPlotCountries.map(item => ({
+  magnitude: item.total,
+  longitude: item.longitude,
+  latitude: item.latitude,
+  ...item,
+}));
+```
+
+```js
+const transformWorldData = byProjectsWorkedFor.map(item => {
+  const countries = item[0].split(",");
+  const numberOfAnswers = item[1].length;
+
+  return countries.map(c => ({
+    country: c.trim(),
+    numberOfAnswers,
+  }))
+}).flat();
+```
+```js
+const totalByCountry = Array.from(d3.group(transformWorldData, d => d.country)).map(
+  item => {
+    return {
+      country: item[0],
+      total: item[1].reduce((acc, current) => acc + current.numberOfAnswers, 0)
+    }
+  }
+);
+```
+```js
+const dataToPlotCountries = totalByCountry.map(item => ({
+  ...item,
+  country_from_answer: item.country,
+  ...latAndLon.find(latlon => latlon.name === item.country),
+}))
+```
+
+```js
+const longitude = view(
+  Inputs.range([-180, 180], {label: "longitude", step: 3, value: 90})
+)
+```
+
+<div class="grid" style="grid-auto-rows: 504px;">
+  <div class="card">${
+  resize((width, height) => Plot.plot({
+    width: width,
+    height: height,
+     projection: {type: "orthographic", rotate: [-longitude, -30]},
+  r: {transform: (d) => d < 1 ? Math.pow(10, d): d},
+  //this dataset is not balanced, due to a single data point having 100 it makes the
+  // chart to go wild. applying pow only for elements with low values adjust that
+  marks: [
+    Plot.geo(land, {fill: "currentColor", fillOpacity: 0.2}),
+    Plot.sphere(),
+    Plot.dot(answersByCountry, {
+      x: "longitude",
+      y: "latitude",
+      r: "magnitude",
+      stroke: "red",
+      fill: "red",
+      fillOpacity: 0.2,
+      title: "country_from_answer"
+    })
+  ]
+  }))}
+  </div>
+</div>
+
+## References
+
+- [Plot official documentation](https://observablehq.com/plot/features/plots)
+- https://observablehq.com/@observablehq/build-your-first-choropleth-map-with-observable-plot
+- https://observablehq.com/plot/marks/geo
+- https://observablehq.com/plot/features/projections
+- https://observablehq.com/@observablehq/plot-world-projections?intent=fork
+- https://observablehq.com/@observablehq/plot-earthquake-globe?intent=fork
+- https://observablehq.com/@observablehq/plot-diverging-stacked-bar
+
+### Framework
+
+- https://observablehq.com/framework/lib/inputs
+
+### Countries data
+
+- https://developers.google.com/public-data/docs/canonical/countries_csv
+- https://www.convertjson.com/html-table-to-json.htm
+
+<!-- Here are some ideas of things you could try…
+<div class="grid grid-cols-4">
+  <div class="card">
+    Chart your own data using <a href="https://observablehq.com/framework/lib/plot"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/display#responsive-display"><code>resize</code></a>.
+  </div>
+  <div class="card">
+    Create a <a href="https://observablehq.com/framework/project-structure">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>docs</code> folder.
+  </div>
+  <div class="card">
+    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
+  </div>
+  <div class="card">
+    Write a <a href="https://observablehq.com/framework/loaders">data loader</a> that queries a local database or API, generating a data snapshot on build.
+  </div>
+  <div class="card">
+    Import a <a href="https://observablehq.com/framework/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.
+  </div>
+  <div class="card">
+    Ask for help, or share your work or ideas, on the <a href="https://talk.observablehq.com/">Observable forum</a>.
+  </div>
+  <div class="card">
+    Visit <a href="https://github.com/observablehq/framework">Framework on GitHub</a> and give us a star. Or file an issue if you’ve found a bug!
+  </div>
+</div>
+-->
+
+```js
+const likertOptions = [
+  "Strongly disagree",
+  "Disagree",
+  "Neutral",
+  "Agree",
+  "Strongly Agree"
+]
+```
+
+```js
+// Copyright 2021-2023 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/treemap
+function Treemap(data, { // data is either tabular (array of objects) or hierarchy (nested objects)
+  path, // as an alternative to id and parentId, returns an array identifier, imputing internal nodes
+  id = Array.isArray(data) ? d => d.id : null, // if tabular data, given a d in data, returns a unique identifier (string)
+  parentId = Array.isArray(data) ? d => d.parentId : null, // if tabular data, given a node d, returns its parent’s identifier
+  children, // if hierarchical data, given a d in data, returns its children
+  value, // given a node d, returns a quantitative value (for area encoding; null for count)
+  sort = (a, b) => d3.descending(a.value, b.value), // how to sort nodes prior to layout
+  label, // given a leaf node d, returns the name to display on the rectangle
+  group, // given a leaf node d, returns a categorical value (for color encoding)
+  title, // given a leaf node d, returns its hover text
+  link, // given a leaf node d, its link (if any)
+  linkTarget = "_blank", // the target attribute for links (if any)
+  tile = d3.treemapBinary, // treemap strategy
+  width = 640, // outer width, in pixels
+  height = 400, // outer height, in pixels
+  margin = 0, // shorthand for margins
+  marginTop = margin, // top margin, in pixels
+  marginRight = margin, // right margin, in pixels
+  marginBottom = margin, // bottom margin, in pixels
+  marginLeft = margin, // left margin, in pixels
+  padding = 1, // shorthand for inner and outer padding
+  paddingInner = padding, // to separate a node from its adjacent siblings
+  paddingOuter = padding, // shorthand for top, right, bottom, and left padding
+  paddingTop = paddingOuter, // to separate a node’s top edge from its children
+  paddingRight = paddingOuter, // to separate a node’s right edge from its children
+  paddingBottom = paddingOuter, // to separate a node’s bottom edge from its children
+  paddingLeft = paddingOuter, // to separate a node’s left edge from its children
+  round = true, // whether to round to exact pixels
+  colors = d3.schemeTableau10, // array of colors
+  zDomain, // array of values for the color scale
+  fill = "#ccc", // fill for node rects (if no group color encoding)
+  fillOpacity = group == null ? null : 0.6, // fill opacity for node rects
+  stroke, // stroke for node rects
+  strokeWidth, // stroke width for node rects
+  strokeOpacity, // stroke opacity for node rects
+  strokeLinejoin, // stroke line join for node rects
+} = {}) {
+
+  // If id and parentId options are specified, or the path option, use d3.stratify
+  // to convert tabular data to a hierarchy; otherwise we assume that the data is
+  // specified as an object {children} with nested objects (a.k.a. the “flare.json”
+  // format), and use d3.hierarchy.
+
+  // We take special care of any node that has both a value and children, see
+  // https://observablehq.com/@d3/treemap-parent-with-value.
+  const stratify = data => (d3.stratify().path(path)(data)).each(node => {
+    if (node.children?.length && node.data != null) {
+      const child = new d3.Node(node.data);
+      node.data = null;
+      child.depth = node.depth + 1;
+      child.height = 0;
+      child.parent = node;
+      child.id = node.id + "/";
+      node.children.unshift(child);
+    }
+  });
+  const root = path != null ? stratify(data)
+      : id != null || parentId != null ? d3.stratify().id(id).parentId(parentId)(data)
+      : d3.hierarchy(data, children);
+
+  // Compute the values of internal nodes by aggregating from the leaves.
+  value == null ? root.count() : root.sum(d => Math.max(0, d ? value(d) : null));
+
+  // Prior to sorting, if a group channel is specified, construct an ordinal color scale.
+  const leaves = root.leaves();
+  const G = group == null ? null : leaves.map(d => group(d.data, d));
+  if (zDomain === undefined) zDomain = G;
+  zDomain = new d3.InternSet(zDomain);
+  const color = group == null ? null : d3.scaleOrdinal(zDomain, colors);
+
+  // Compute labels and titles.
+  const L = label == null ? null : leaves.map(d => label(d.data, d));
+  const T = title === undefined ? L : title == null ? null : leaves.map(d => title(d.data, d));
+
+  // Sort the leaves (typically by descending value for a pleasing layout).
+  if (sort != null) root.sort(sort);
+
+  // Compute the treemap layout.
+  d3.treemap()
+      .tile(tile)
+      .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
+      .paddingInner(paddingInner)
+      .paddingTop(paddingTop)
+      .paddingRight(paddingRight)
+      .paddingBottom(paddingBottom)
+      .paddingLeft(paddingLeft)
+      .round(round)
+    (root);
+
+  const svg = d3.create("svg")
+      .attr("viewBox", [-marginLeft, -marginTop, width, height])
+      .attr("width", width)
+      .attr("height", height)
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10);
+
+  const node = svg.selectAll("a")
+    .data(leaves)
+    .join("a")
+      .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
+      .attr("target", link == null ? null : linkTarget)
+      .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+  node.append("rect")
+      .attr("fill", color ? (d, i) => color(G[i]) : fill)
+      .attr("fill-opacity", fillOpacity)
+      .attr("stroke", stroke)
+      .attr("stroke-width", strokeWidth)
+      .attr("stroke-opacity", strokeOpacity)
+      .attr("stroke-linejoin", strokeLinejoin)
+      .attr("width", d => d.x1 - d.x0)
+      .attr("height", d => d.y1 - d.y0);
+
+  if (T) {
+    node.append("title").text((d, i) => T[i]);
+  }
+
+  if (L) {
+    // A unique identifier for clip paths (to avoid conflicts).
+    const uid = `O-${Math.random().toString(16).slice(2)}`;
+
+    node.append("clipPath")
+       .attr("id", (d, i) => `${uid}-clip-${i}`)
+     .append("rect")
+       .attr("width", d => d.x1 - d.x0)
+       .attr("height", d => d.y1 - d.y0);
+
+    node.append("text")
+        .attr("clip-path", (d, i) => `url(${new URL(`#${uid}-clip-${i}`, location)})`)
+      .selectAll("tspan")
+      .data((d, i) => `${L[i]}`.split(/\n/g))
+      .join("tspan")
+        .attr("x", 3)
+        .attr("y", (d, i, D) => `${(i === D.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+        .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 0.7 : null)
+        .text(d => d);   
+  }
+
+  return Object.assign(svg.node(), {scales: {color}});
+}
+```
