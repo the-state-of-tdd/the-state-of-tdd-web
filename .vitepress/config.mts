@@ -26,6 +26,7 @@ export default defineConfig({
   description: "The TDD state in the industry of software development",
   head,
   srcExclude: ["results"],
+  cleanUrls: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
