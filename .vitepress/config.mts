@@ -30,7 +30,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      // { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Team', link: '/team' }
     ],
 
     sidebar: [
@@ -42,9 +42,12 @@ export default defineConfig({
       //   ]
       // }
     ],
-
+    footer: {
+      message: 'The content here is under the Attribution 4.0 International(CC BY 4.0) license.',
+    },
     socialLinks: [
-      // { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'twitter', link: 'https://twitter.com/thestateoftdd' },
+      { icon: 'github', link: 'https://github.com/the-state-of-tdd' },
     ]
   }
 })
