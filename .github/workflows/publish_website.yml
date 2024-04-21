@@ -42,10 +42,19 @@ jobs:
       - name: Install dependencies
         run: |
           npm i
+          cd results && npm i
 
       - name: Build with VitePress
         run: |
           npm run docs:build
+
+      - name: Build dataviz
+        run: |
+          cd results && npm run build
+
+      - name: Move data viz
+        run: |
+          mv results/dist .vitepress/dist/results
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
