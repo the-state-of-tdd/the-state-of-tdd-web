@@ -15,14 +15,19 @@ hero:
 #      link: /api-examples
 
 features:
-  - title: 2024 (in progress)
+  - title: 2024 (in progress) - Join us!
+    icon: 🚧
     details: Join us in collecting data and changing the way the industry builds software through Test Driven Development.
+    link: "2024/"
   - title: 2023 (skipped)
+    icon: ❌
     details: No data was collected
   - title: 2022 - data available
+    icon: ✅
     details: What does the data have to say about TDD in 2022?
     link: "https://thestateoftdd.org/results/2022"
   - title: 2021 - data available
+    icon: ✅
     details: The first edition of collecting information regarding the TDD practice focused on TDD anti-patterns.
     link: "results/2021"
 ---
