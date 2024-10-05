@@ -22,6 +22,7 @@ features:
   - title: 2023 (skipped)
     icon: ❌
     details: No data was collected
+    link: "https://thestateoftdd.org/results/2023"
   - title: 2022 - data available
     icon: ✅
     details: What does the data have to say about TDD in 2022?
