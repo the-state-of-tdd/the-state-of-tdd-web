@@ -29,6 +29,6 @@ features:
   - title: 2021 - data available
     icon: ✅
     details: The first edition of collecting information regarding the TDD practice focused on TDD anti-patterns.
-    link: "results/2021"
+    link: "https://thestateoftdd.org/results/2021"
 ---
 
