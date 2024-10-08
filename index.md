@@ -5,14 +5,9 @@ layout: home
 hero:
   name: "The state of TDD"
   text: "The TDD state in the industry of software development"
-#  tagline:
-#  actions:
-#    - theme: brand
-#      text: Markdown Examples
-#      link: /markdown-examples
-#    - theme: alt
-#      text: API Examples
-#      link: /api-examples
+  image:
+    light: /logo-black.png
+    dark: /logo-white.png
 
 features:
   - title: 2024 (in progress) - Join us!
