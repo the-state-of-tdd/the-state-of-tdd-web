@@ -2,7 +2,7 @@
 
 [![Deploy thestateoftdd.org](https://github.com/the-state-of-tdd/the-state-of-tdd-web/actions/workflows/publish_website.yml/badge.svg)](https://github.com/the-state-of-tdd/the-state-of-tdd-web/actions/workflows/publish_website.yml)
 
-[The state of TDD logo](/public/logo-white.png)
+![The state of TDD logo](/public/logo-white.png)
 
 The TDD Survey 2024 is a community-driven initiative that collects data on the real-world practices of Test-Driven Development (TDD). The goal of this project is to gather insights from developers and teams globally to shape the future of TDD, providing a better understanding of how it is practiced and evolving within the industry.
 
