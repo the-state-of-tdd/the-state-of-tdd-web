@@ -28,3 +28,8 @@ features:
     link: "https://thestateoftdd.org/results/2021"
 ---
 
+<br/>
+
+# Join us
+
+The state of TDD is open to everyone. Join our group discussion on [Google Groups](https://groups.google.com/g/the-state-of-tdd).
