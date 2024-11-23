@@ -10,10 +10,10 @@ hero:
     dark: /logo-white.png
 
 features:
-  - title: 2024 (in progress) - Join us!
+  - title: 2024 (in progress) - Processing the data!
     icon: 🚧
-    details: Join us in collecting data and changing the way the industry builds software through Test Driven Development.
-    link: "2024/"
+    details: We are processing the data!.
+    link: "https://thestateoftdd.org/results/2024/"
   - title: 2023 (skipped)
     icon: ❌
     details: No data was collected
