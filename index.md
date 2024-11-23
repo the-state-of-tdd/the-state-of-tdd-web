@@ -13,7 +13,7 @@ features:
   - title: 2024 (in progress) - Processing the data!
     icon: 🚧
     details: We are processing the data!.
-    link: "https://thestateoftdd.org/results/2024/"
+    link: "https://thestateoftdd.org/results/2024"
   - title: 2023 (skipped)
     icon: ❌
     details: No data was collected
