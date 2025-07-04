@@ -10,8 +10,10 @@ hero:
     dark: /logo-white.png
 
 features:
-  - title: 2024 (in progress) - Processing the data!
-    icon: 🚧
+  - title: 2025 (in progress)
+    icon: 🚧 
+  - title: 2024 - data available
+    icon: ✅
     details: We are processing the data!.
     link: "https://thestateoftdd.org/results/2024"
   - title: 2023 (skipped)

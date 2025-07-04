@@ -4,7 +4,6 @@
 
 <img src="./public/logo-white.png" alt="The state of TDD logo" width="200" />
 
-
 The TDD Survey 2024 is a community-driven initiative that collects data on the real-world practices of Test-Driven Development (TDD). The goal of this project is to gather insights from developers and teams globally to shape the future of TDD, providing a better understanding of how it is practiced and evolving within the industry.
 
 ## The history
@@ -23,8 +22,9 @@ will never be shared or sold.
 
 ## Raw dataset from previous editions
 
-Currently, the raw data for 2021 and 2022 are available:
+Currently, the raw data for 2021, 2022 and 2024 are available:
 
+- [2024](https://github.com/the-state-of-tdd/the-state-of-tdd-web/blob/a31793e74f584f5ba70ea06574e6a9f563034f46/results/docs/raw-data-2024.csv)
 - [2022](https://gist.github.com/marabesi/03e6629adc9d8324a582813905848e44)
 - [2021](https://gist.github.com/marabesi/5f0eafd3ea948a5c1dcd25720299ac17)
 
