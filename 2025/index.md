@@ -21,4 +21,4 @@ By participating, you’re contributing to a larger body of knowledge that will 
 
 <br />
 
-<!-- [Take the Survey Now](https://forms.gle/QHGra5GLdae3Rf9GA) -->
+[Take the Survey Now](https://forms.gle/m5NfeVrcvuELXMu1A)
