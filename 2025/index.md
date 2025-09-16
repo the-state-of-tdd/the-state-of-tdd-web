@@ -9,7 +9,7 @@ hero:
 
 As the software development landscape evolves, Test-Driven Development (TDD) continues to play a crucial role in ensuring high-quality, maintainable code. But as more teams adopt or refine their TDD practices, it’s important to understand the real-world challenges and successes developers face.
 
-Our 2024 TDD survey aims to collect insights from developers, testers, and teams across the globe to:
+Our 2025 TDD survey aims to collect insights from developers, testers, and teams across the globe to:
 
 - Identify current trends in TDD adoption and usage.
 - Highlight common obstacles and success factors in TDD workflows.

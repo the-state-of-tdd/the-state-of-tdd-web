@@ -11,7 +11,9 @@ hero:
 
 features:
   - title: 2025 (in progress)
-    icon: 🚧 
+    icon: 🚧
+    details: Spread the word and help us!
+    link: https://thestateoftdd.org/2025 
   - title: 2024 - data available
     icon: ✅
     details: We are processing the data!.
